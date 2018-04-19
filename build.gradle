@@ -26,8 +26,8 @@ ext.name = "Keel"
 ext.version = "1.0.0"
 ext.group = "nz.arklabs.keel"
 ext.org = "arklabs"
-ext.scm = ''
-ext.description = 'Keel is a small library for working with viewmodels and reducers'
+ext.scm = 'https://github.com/arklabsnz/Keel'
+ext.description = 'A framework combining Android ViewModels and Reducers'
 
 subprojects { project ->
     group = rootProject.ext.group

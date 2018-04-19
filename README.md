@@ -1,5 +1,7 @@
 # Keel
 
+A framework combining Android ViewModels and Reducers.
+
 Download
 -----
 

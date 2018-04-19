@@ -1,0 +1,11 @@
+ext.version = "1.0.0"
+ext.group = "nz.arklabs.keel"
+ext.scm = ''
+ext.description = ''
+
+ext.compileSdk = 27
+ext.minSdk = 15
+ext.buildTools = "27.0.3"
+ext.kotlin_version = '1.2.31'
+ext.support_version = '27.1.1'
+ext.junit_version = '4.12'

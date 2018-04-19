@@ -1,0 +1,37 @@
+if (project.plugins.hasPlugin("com.android.library")) {
+
+    apply plugin: 'digital.wup.android-maven-publish'
+
+    project.afterEvaluate {
+        task sourcesJar(type: Jar) {
+            from android.sourceSets.main.java.srcDirs
+        }
+    }
+
+    publishing {
+        publications {
+            aar(MavenPublication) {
+                from project.components.android
+                artifact project.sourcesJar {
+                    // not required, includes sourcesJar with correct classifer
+                    classifier "sources"
+                }
+                groupId project.group
+                artifactId project.name
+                version project.version
+            }
+        }
+
+        repositories {
+            maven {
+                name 'arklabsnz-keel'
+                url "https://api.bintray.com/maven/${project.org}/${project.repo}/${project.name}/;publish=1"
+
+                credentials {
+                    username BINTRAY_USER
+                    password BINTRAY_API_KEY
+                }
+            }
+        }
+    }
+}

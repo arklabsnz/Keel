@@ -1,1 +1,1 @@
-include ':viewmodel', ':viewmodel-testing'
+include ':viewmodel', ':viewmodel-dagger', ':viewmodel-testing'

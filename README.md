@@ -8,6 +8,8 @@ Download
 ```groovy
 implementation 'nz.arklabs.keel:viewmodel:1.0.0'
 
+implementation 'nz.arklabs.keel:viewmodel-dagger:1.0.0'
+
 testImplementation 'nz.arklabs.keel:viewmodel-testing:1.0.0'
 
 ```

@@ -1,0 +1,46 @@
+buildscript {
+    apply from: '../dependencies.gradle'
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath Dependencies.kotlinGradlePlugin
+        classpath Dependencies.androidMavenPublish
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: '../dependencies.gradle'
+apply from: '../publishing.gradle'
+
+android {
+    compileSdkVersion Versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.compileSdk
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+dependencies {
+    api Dependencies.aacLifecycle
+    api Dependencies.dagger
+    implementation Dependencies.kotlinStdlib
+}

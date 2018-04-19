@@ -1,4 +1,4 @@
-buildscript{
+buildscript {
     apply from: '../dependencies.gradle'
 
     repositories {
@@ -6,22 +6,23 @@ buildscript{
         jcenter()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath Dependencies.kotlinGradlePlugin
+        classpath Dependencies.androidMavenPublish
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'digital.wup.android-maven-publish'
 
-apply from:'../dependencies.gradle'
-
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion compileSdk
+    compileSdkVersion Versions.compileSdk
 
     defaultConfig {
-        minSdkVersion minSdk
-        targetSdkVersion compileSdk
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.compileSdk
     }
 
     buildTypes {
@@ -34,12 +35,16 @@ android {
 }
 
 repositories {
+    google()
     jcenter()
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:$support_version"
-    testImplementation "junit:junit:$junit_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
+    api Dependencies.aacLifecycle
+    implementation Dependencies.rxAndroid
+    implementation Dependencies.rxJava
 
+    implementation Dependencies.appCompat
+    testImplementation Dependencies.junit
+    implementation Dependencies.kotlinStdlib
+}

@@ -7,8 +7,13 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
+
+apply from: 'dependencies.gradle'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 allprojects {
     repositories {
@@ -17,6 +22,67 @@ allprojects {
     }
 }
 
+ext.name = "Keel"
+ext.version = "1.0.0"
+ext.group = "nz.arklabs.keel"
+ext.org = "arklabs"
+ext.scm = ''
+ext.description = 'Keel is a small library for working with viewmodels and reducers'
+
+subprojects { project ->
+    group = rootProject.ext.group
+    version = rootProject.ext.version
+
+    project.afterEvaluate {
+        task sourcesJar(type: Jar) {
+            from android.sourceSets.main.java.srcDirs
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+publishing {
+    publications {
+        viewmodel(MavenPublication) {
+            def project = project(':viewmodel')
+            from project.components.android
+            artifact project.sourcesJar {
+                // not required, includes sourcesJar with correct classifer
+                classifier "sources"
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+
+        viewmodelTesting(MavenPublication) {
+            def project = project(':viewmodel-testing')
+            from project.components.android
+            artifact project.sourcesJar {
+                classifier "sources"
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['viewmodel', 'viewmodelTesting']
+    pkg {
+        repo = 'maven'
+        name = rootProject.ext.name
+        desc = rootProject.ext.description
+        userOrg = rootProject.ext.org
+        licenses = ['MIT']
+        vcsUrl = rootProject.ext.scm
+        publish = true
+        publicDownloadNumbers = true
+    }
 }

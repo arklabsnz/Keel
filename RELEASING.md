@@ -8,6 +8,6 @@ Releasing
  5. `./gradlew clean build bintrayUpload`.
  6. Visit [Bintray](https://bintray.com) and publish the artifact.
  7. `git tag -a X.Y.X -m "Version X.Y.Z"` (where X.Y.Z is the new version)
- 8. Update the version in `common.gradle` to the next SNAPSHOT version.
+ 8. Update the version in `build.gradle` to the next SNAPSHOT version.
  9. `git commit -am "Prepare next development version."`
  10. `git push && git push --tags`

@@ -20,7 +20,7 @@ allprojects {
 ext.repo = "keel"
 ext.version = "1.0.0"
 ext.group = "nz.arklabs.keel"
-ext.org = "arklabsnz"
+ext.org = "arklabs"
 ext.scm = 'https://github.com/arklabsnz/Keel'
 ext.description = 'A framework combining Android ViewModels and Reducers'
 

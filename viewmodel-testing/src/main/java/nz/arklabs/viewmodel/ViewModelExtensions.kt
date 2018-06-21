@@ -12,6 +12,6 @@ fun <S : KeelViewModel.State, E : KeelViewModel.Event, U : KeelViewModel.UiEvent
 
 fun <S : KeelViewModel.State, E : KeelViewModel.Event, U : KeelViewModel.UiEvent> KeelViewModel<S, E, U>.observeState(): Observer<S> {
     val observer = mock<Observer<S>>()
-    state.observeForever(observer)
+    liveState.observeForever(observer)
     return observer
 }

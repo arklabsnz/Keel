@@ -1,11 +1,13 @@
 package nz.arklabs.keel.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.LiveDataReactiveStreams
 import android.arch.lifecycle.ViewModel
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
 open class KeelViewModel<
@@ -14,22 +16,25 @@ open class KeelViewModel<
         U : KeelViewModel.UiEvent
         >(initialState: S, reducer: Reducer<S, E>) : ViewModel() {
 
+    private val disposables = CompositeDisposable()
+
     internal val eventsSubject: PublishSubject<E> = PublishSubject.create()
-    private val compositeDisposable = CompositeDisposable()
-    val state: MutableLiveData<S> = MutableLiveData()
+    internal val stateSubject: BehaviorSubject<S> = BehaviorSubject.createDefault(initialState)
+
     val uiEvents: SingleLiveEvent<U> = SingleLiveEvent()
     protected val events = eventsSubject as Observable<E>
 
     init {
-        state.value = initialState
-
-        compositeDisposable.add(eventsSubject
+        disposables.add(eventsSubject
+                .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .scan(initialState, { state, event -> reducer.apply(state, event) })
                 .distinctUntilChanged()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ state.value = it }))
+                .subscribe({ stateSubject.onNext(it) }))
     }
+
+    val state: Observable<S> = stateSubject
+    val liveState: LiveData<S> = LiveDataReactiveStreams.fromPublisher(stateSubject.toFlowable(BackpressureStrategy.BUFFER))
 
     fun publishEvent(event: E) {
         eventsSubject.onNext(event)
@@ -40,7 +45,7 @@ open class KeelViewModel<
     }
 
     override fun onCleared() {
-        compositeDisposable.clear()
+        disposables.clear()
         super.onCleared()
     }
 

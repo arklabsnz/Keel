@@ -41,6 +41,7 @@ repositories {
 
 dependencies {
     api Dependencies.aacLifecycle
+    api Dependencies.aacReactiveStreams
     implementation Dependencies.rxAndroid
     implementation Dependencies.rxJava
 

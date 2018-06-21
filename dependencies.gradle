@@ -14,6 +14,7 @@ ext.Dependencies = [
         appCompat          : "com.android.support:appcompat-v7:$Versions.support",
         kotlinStdlib       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Versions.kotlin",
         aacLifecycle       : "android.arch.lifecycle:extensions:$Versions.aac",
+        aacReactiveStreams : "android.arch.lifecycle:reactivestreams:$Versions.aac",
         aacCoreTesting     : "android.arch.core:core-testing:$Versions.aac",
         rxAndroid          : "io.reactivex.rxjava2:rxandroid:2.0.2",
         rxJava             : "io.reactivex.rxjava2:rxjava:2.1.12",

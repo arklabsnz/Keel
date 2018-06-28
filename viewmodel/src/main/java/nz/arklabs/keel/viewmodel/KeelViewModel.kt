@@ -18,7 +18,7 @@ open class KeelViewModel<
 
     private val disposables = CompositeDisposable()
 
-    internal val eventsSubject: PublishSubject<E> = PublishSubject.create()
+    internal val eventsSubject: BehaviorSubject<E> = BehaviorSubject.create()
     internal val stateSubject: BehaviorSubject<S> = BehaviorSubject.createDefault(initialState)
 
     val uiEvents: SingleLiveEvent<U> = SingleLiveEvent()
@@ -28,9 +28,10 @@ open class KeelViewModel<
         disposables.add(eventsSubject
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .scan(initialState, { state, event -> reducer.apply(state, event) })
+                .scan(initialState) { state, event -> reducer.apply(state, event) }
                 .distinctUntilChanged()
-                .subscribe({ stateSubject.onNext(it) }))
+                .doOnError { it.printStackTrace() }
+                .subscribe { stateSubject.onNext(it) })
     }
 
     val state: Observable<S> = stateSubject

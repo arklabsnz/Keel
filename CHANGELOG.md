@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.1.2
+----------------------------
+
+  * Changes events subject to ReplaySubject in order to all buffer events it receives before it subscribes
+
 Version 1.1.1
 ----------------------------
 

@@ -9,6 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.ReplaySubject
 
 open class KeelViewModel<
         S : KeelViewModel.State,
@@ -18,7 +19,7 @@ open class KeelViewModel<
 
     private val disposables = CompositeDisposable()
 
-    internal val eventsSubject: BehaviorSubject<E> = BehaviorSubject.create()
+    internal val eventsSubject: ReplaySubject<E> = ReplaySubject.create()
     internal val stateSubject: BehaviorSubject<S> = BehaviorSubject.createDefault(initialState)
 
     val uiEvents: SingleLiveEvent<U> = SingleLiveEvent()
@@ -34,7 +35,7 @@ open class KeelViewModel<
                 .subscribe { stateSubject.onNext(it) })
     }
 
-    val state: Observable<S> = stateSubject
+    val state: Observable<S> = stateSubject.hide()
     val liveState: LiveData<S> = LiveDataReactiveStreams.fromPublisher(stateSubject.toFlowable(BackpressureStrategy.BUFFER))
 
     fun publishEvent(event: E) {

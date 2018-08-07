@@ -3,13 +3,12 @@ package nz.arklabs.keel.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.LiveDataReactiveStreams
 import android.arch.lifecycle.ViewModel
+import com.jakewharton.rxrelay2.BehaviorRelay
+import com.jakewharton.rxrelay2.ReplayRelay
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.ReplaySubject
 
 open class KeelViewModel<
         S : KeelViewModel.State,
@@ -19,31 +18,45 @@ open class KeelViewModel<
 
     private val disposables = CompositeDisposable()
 
-    internal val eventsSubject: ReplaySubject<E> = ReplaySubject.create()
-    internal val stateSubject: BehaviorSubject<S> = BehaviorSubject.createDefault(initialState)
+    internal val eventsSubject: ReplayRelay<E> = ReplayRelay.create()
+    internal val stateSubject: BehaviorRelay<S> = BehaviorRelay.createDefault(initialState)
 
     val uiEvents: SingleLiveEvent<U> = SingleLiveEvent()
-    protected val events = eventsSubject as Observable<E>
+    protected val events = eventsSubject.hide()
 
     init {
         disposables.add(eventsSubject
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .scan(initialState) { state, event -> reducer.apply(state, event) }
+                .scan(initialState) { state, event ->
+                    try {
+                        reducer.apply(state, event)
+                    } catch (e: Exception) {
+                        onReducerError(e)
+                        state
+                    }
+                }
                 .distinctUntilChanged()
-                .doOnError { it.printStackTrace() }
-                .subscribe { stateSubject.onNext(it) })
+                .subscribe(
+                        { state -> stateSubject.accept(state) },
+                        { e -> onReducerError(e) }
+                )
+        )
     }
 
     val state: Observable<S> = stateSubject.hide()
     val liveState: LiveData<S> = LiveDataReactiveStreams.fromPublisher(stateSubject.toFlowable(BackpressureStrategy.BUFFER))
 
     fun publishEvent(event: E) {
-        eventsSubject.onNext(event)
+        eventsSubject.accept(event)
     }
 
     fun publishUIEvent(event: U) {
         uiEvents.postValue(event)
+    }
+
+    open fun onReducerError(e: Throwable) {
+        e.printStackTrace()
     }
 
     override fun onCleared() {

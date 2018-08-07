@@ -43,6 +43,7 @@ dependencies {
     api Dependencies.aacLifecycle
     api Dependencies.aacReactiveStreams
     implementation Dependencies.rxAndroid
+    implementation Dependencies.rxRelay
     implementation Dependencies.rxJava
 
     implementation Dependencies.appCompat

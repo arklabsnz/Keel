@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 1.1.5
+----------------------------
+
+ * Adds LiveData extension function `observeNonNull`
+ * Handles error when state reduction fails
+ * Updates dependencies
+
 Version 1.1.2
 ----------------------------
 

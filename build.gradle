@@ -18,7 +18,7 @@ allprojects {
 }
 
 ext.repo = "keel"
-ext.version = "1.2.0"
+ext.version = "1.2.1"
 ext.group = "nz.arklabs.keel"
 ext.org = "arklabs"
 ext.scm = 'https://github.com/arklabsnz/Keel'

@@ -47,12 +47,22 @@ open class KeelViewModel<
     val state: Observable<S> = stateSubject.hide()
     val liveState: LiveData<S> = LiveDataReactiveStreams.fromPublisher(stateSubject.toFlowable(BackpressureStrategy.BUFFER))
 
+    @Deprecated("Use convenience method", replaceWith = ReplaceWith("publish"))
     fun publishEvent(event: E) {
+        publish(event)
+    }
+
+    fun publish(event: E) {
         eventsSubject.accept(event)
     }
 
-    fun publishUIEvent(event: U) {
+    fun publish(event: U) {
         uiEvents.postValue(event)
+    }
+
+    @Deprecated("Use convenience method", replaceWith = ReplaceWith("publish"))
+    fun publishUIEvent(event: U) {
+        publish(event)
     }
 
     open fun onReducerError(e: Throwable) {

@@ -1,8 +1,8 @@
 package nz.arklabs.keel.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.LiveDataReactiveStreams
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.ReplayRelay
 import io.reactivex.BackpressureStrategy

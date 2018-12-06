@@ -1,6 +1,6 @@
 package nz.arklabs.viewmodel
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import com.nhaarman.mockito_kotlin.*
 import org.mockito.Mockito
 

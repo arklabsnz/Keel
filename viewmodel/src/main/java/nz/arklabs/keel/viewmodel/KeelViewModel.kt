@@ -9,12 +9,18 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 open class KeelViewModel<
         S : KeelViewModel.State,
         E : KeelViewModel.Event,
         U : KeelViewModel.UiEvent
-        >(initialState: S, reducer: Reducer<S, E>) : ViewModel() {
+        >(initialState: S, reducer: Reducer<S, E>) : ViewModel(), CoroutineScope {
+
+    protected val job = Job()
+    override val coroutineContext = Dispatchers.Main + job
 
     private val disposables = CompositeDisposable()
 
@@ -71,6 +77,7 @@ open class KeelViewModel<
 
     override fun onCleared() {
         disposables.clear()
+        job.cancel()
         super.onCleared()
     }
 

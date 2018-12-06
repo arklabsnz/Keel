@@ -45,6 +45,7 @@ dependencies {
     implementation Dependencies.rxAndroid
     implementation Dependencies.rxRelay
     implementation Dependencies.rxJava
+    api Dependencies.coroutinesCore
 
     implementation Dependencies.appCompat
     testImplementation Dependencies.junit

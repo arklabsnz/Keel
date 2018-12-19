@@ -74,6 +74,10 @@ open class KeelViewModel<
         publish(event)
     }
 
+    fun withState(callback: (state: S) -> Unit) {
+        callback(liveState.value!!)
+    }
+
     open fun onReducerError(e: Throwable) {
         e.printStackTrace()
     }

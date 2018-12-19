@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.2.5
+----------------------------
+
+ * Adds `withState` convenience method for accessing state within the viewmodel
+
 Version 1.1.5
 ----------------------------
 

@@ -23,7 +23,7 @@ ext.Dependencies = [
         rxRelay            : "com.jakewharton.rxrelay2:rxrelay:2.1.0",
 
         mockitoKotlin      : "com.nhaarman:mockito-kotlin:1.5.0",
-        dagger             : "com.google.dagger:dagger:2.19",
+        dagger             : "com.google.dagger:dagger:2.21",
 
         coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
 ]

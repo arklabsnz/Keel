@@ -25,5 +25,5 @@ ext.Dependencies = [
         mockitoKotlin      : "com.nhaarman:mockito-kotlin:1.5.0",
         dagger             : "com.google.dagger:dagger:2.19",
 
-        coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+        coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1-eap13-2"
 ]

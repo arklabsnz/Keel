@@ -6,10 +6,10 @@ Download
 -----
 
 ```groovy
-implementation 'nz.arklabs.keel:viewmodel:1.1.5'
+implementation 'nz.arklabs.keel:viewmodel:1.2.6'
 
-implementation 'nz.arklabs.keel:viewmodel-dagger:1.1.5'
+implementation 'nz.arklabs.keel:viewmodel-dagger:1.2.6'
 
-testImplementation 'nz.arklabs.keel:viewmodel-testing:1.1.5'
+testImplementation 'nz.arklabs.keel:viewmodel-testing:1.2.6'
 
 ```

@@ -12,9 +12,11 @@ if (project.plugins.hasPlugin("com.android.library")) {
         publications {
             aar(MavenPublication) {
                 from project.components.android
-                artifact project.sourcesJar {
-                    // not required, includes sourcesJar with correct classifer
-                    classifier "sources"
+                afterEvaluate {
+                    artifact project.sourcesJar {
+                        // not required, includes sourcesJar with correct classifer
+                        classifier "sources"
+                    }
                 }
                 groupId project.group
                 artifactId project.name

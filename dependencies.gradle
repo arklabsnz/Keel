@@ -2,9 +2,10 @@ ext.Versions = [
         compileSdk: 28,
         minSdk    : 15,
         buildTools: "28.0.3",
-        kotlin    : "1.3.40",
+        kotlin    : "1.3.50",
 ]
 
+//gw dependencyUpdates -Drevision=release
 ext.Dependencies = [
         kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$Versions.kotlin",
         kotlinStdlib       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Versions.kotlin",
@@ -19,11 +20,11 @@ ext.Dependencies = [
         aacCoreTesting     : "androidx.arch.core:core-testing:2.0.1",
 
         rxAndroid          : "io.reactivex.rxjava2:rxandroid:2.1.1",
-        rxJava             : "io.reactivex.rxjava2:rxjava:2.2.8",
-        rxRelay            : "com.jakewharton.rxrelay2:rxrelay:2.1.0",
+        rxJava             : "io.reactivex.rxjava2:rxjava:2.2.12",
+        rxRelay            : "com.jakewharton.rxrelay2:rxrelay:2.1.1",
 
         mockitoKotlin      : "com.nhaarman:mockito-kotlin:1.5.0",
-        dagger             : "com.google.dagger:dagger:2.23.2",
+        dagger             : "com.google.dagger:dagger:2.24",
 
-        coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+        coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0"
 ]

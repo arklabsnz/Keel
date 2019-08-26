@@ -27,7 +27,7 @@ open class KeelViewModel<
 
     private val disposables = CompositeDisposable()
 
-    internal val eventsSubject: ReplayRelay<E> = ReplayRelay.create()
+    internal val eventsSubject: ReplayRelay<E> = ReplayRelay.createWithSize(32)
     internal val stateSubject: BehaviorRelay<S> = BehaviorRelay.createDefault(initialState)
 
     val uiEvents: SingleLiveEvent<U> = SingleLiveEvent()

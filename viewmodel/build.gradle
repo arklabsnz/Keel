@@ -39,7 +39,9 @@ repositories {
     jcenter()
 }
 
+//gw dependencyUpdates -Drevision=release
 dependencies {
+    api Dependencies.lifecycleKtx
     api Dependencies.aacLifecycle
     api Dependencies.aacReactiveStreams
     implementation Dependencies.rxAndroid

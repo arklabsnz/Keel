@@ -10,7 +10,7 @@ ext.Dependencies = [
         kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$Versions.kotlin",
         kotlinStdlib       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Versions.kotlin",
 
-        androidMavenPublish: "digital.wup:android-maven-publish:3.6.2",
+        androidMavenPublish: "digital.wup:android-maven-publish:3.6.3",
         junit              : "junit:junit:4.12",
 
         appCompat          : "androidx.appcompat:appcompat:1.1.0",

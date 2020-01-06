@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.2.8
+----------------------------
+
+ * Updates dependencies
+
 Version 1.2.5
 ----------------------------
 

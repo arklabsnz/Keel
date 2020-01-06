@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.25.0"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
         classpath 'com.android.tools.build:gradle:3.5.3'
     }
 }
@@ -21,7 +21,7 @@ allprojects {
 }
 
 ext.repo = "keel"
-ext.version = "1.2.7"
+ext.version = "1.2.8"
 ext.group = "nz.arklabs.keel"
 ext.org = "arklabs"
 ext.scm = 'https://github.com/arklabsnz/Keel'

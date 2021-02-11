@@ -15,7 +15,7 @@ ext.Dependencies = [
 
         appCompat          : "androidx.appcompat:appcompat:1.1.0",
 
-        lifecycleKtx       : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
+        lifecycleKtx       : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0",
         aacLifecycle       : "androidx.lifecycle:lifecycle-extensions:2.2.0",
         aacReactiveStreams : "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0",
         aacCoreTesting     : "androidx.arch.core:core-testing:2.1.0",

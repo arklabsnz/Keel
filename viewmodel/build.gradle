@@ -13,16 +13,20 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 apply from: '../dependencies.gradle'
-apply from: '../publishing.gradle'
 
 android {
     compileSdkVersion Versions.compileSdk
+    namespace = 'nz.arklabs.keel.viewmodel'
 
     defaultConfig {
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.compileSdk
+        aarMetadata {
+            minCompileSdk = 29
+        }
     }
 
     buildTypes {
@@ -32,6 +36,25 @@ android {
         }
     }
 
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = rootProject.ext.group
+                artifactId = 'viewmodel'
+                version = rootProject.ext.version
+            }
+        }
+    }
 }
 
 repositories {

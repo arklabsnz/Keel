@@ -5,11 +5,20 @@ A framework combining Android ViewModels and Reducers.
 Download
 -----
 
+Use https://jitpack.io:
+
 ```groovy
-implementation 'nz.arklabs.keel:viewmodel:1.2.6'
 
-implementation 'nz.arklabs.keel:viewmodel-dagger:1.2.6'
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
 
-testImplementation 'nz.arklabs.keel:viewmodel-testing:1.2.6'
+implementation 'com.github.arklabsnz.keel:viewmodel:1.3.0'
+
+implementation 'com.github.arklabsnz.keel:viewmodel-dagger:1.3.0'
+
+testImplementation 'com.github.arklabsnz.keel:viewmodel-testing:1.3.0'
 
 ```

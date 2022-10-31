@@ -3,7 +3,7 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath Dependencies.kotlinGradlePlugin
@@ -39,7 +39,7 @@ android {
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {

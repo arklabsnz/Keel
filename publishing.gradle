@@ -23,17 +23,5 @@ if (project.plugins.hasPlugin("com.android.library")) {
                 version project.version
             }
         }
-
-        repositories {
-            maven {
-                name 'arklabsnz-keel'
-                url "https://api.bintray.com/maven/${project.org}/${project.repo}/${project.name}/;publish=1"
-
-                credentials {
-                    username BINTRAY_USER
-                    password BINTRAY_API_KEY
-                }
-            }
-        }
     }
 }
